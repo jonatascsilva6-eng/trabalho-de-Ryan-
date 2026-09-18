@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chamados · ConnectTI Soluções em Tecnologia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__marca">
+      <span class="topo__sigla">CT</span>
+      <div>
+        <h1>Chamados de suporte</h1>
+        <p>ConnectTI Soluções em Tecnologia</p>
+      </div>
+    </div>
+    <dl class="painel" id="painelResumo">
+      <div><dt>Abertos</dt><dd id="contAberto">–</dd></div>
+      <div><dt>Em atendimento</dt><dd id="contAtendimento">–</dd></div>
+      <div><dt>Concluídos</dt><dd id="contConcluido">–</dd></div>
+    </dl>
+  </header>
+
+  <main class="conteudo">
+    <!-- ================= Formulário ================= -->
+    <section class="coluna-form" aria-labelledby="tituloForm">
+      <form id="formChamado" class="cartao" novalidate>
+        <h2 id="tituloForm">Abrir chamado</h2>
+
+        <input type="hidden" id="chamadoId">
+
+        <label for="solicitante">Nome do solicitante</label>
+        <input type="text" id="solicitante" name="solicitante" maxlength="100"
+               placeholder="Quem pediu o atendimento" required>
+
+        <label for="descricao">Descrição do problema</label>
+        <textarea id="descricao" name="descricao" rows="4" maxlength="1000"
+                  placeholder="O que está acontecendo, desde quando e em qual setor" required></textarea>
+
+        <div class="linha-dupla">
+          <div>
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria" required>
+              <option value="">Selecione</option>
+              <option>Hardware</option>
+              <option>Software</option>
+              <option>Rede</option>
+              <option>Acesso</option>
+              <option>Outros</option>
+            </select>
+          </div>
+          <div>
+            <label for="prioridade">Prioridade</label>
+            <select id="prioridade" name="prioridade" required>
+              <option>Baixa</option>
+              <option selected>Média</option>
+              <option>Alta</option>
+              <option>Urgente</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="campoStatus" class="oculto">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option>Aberto</option>
+            <option>Em atendimento</option>
+            <option>Concluído</option>
+            <option>Cancelado</option>
+          </select>
+        </div>
+
+        <p class="aviso" id="avisoForm" role="alert" hidden></p>
+
+        <div class="acoes-form">
+          <button type="submit" class="btn btn--primario" id="btnSalvar">Registrar chamado</button>
+          <button type="button" class="btn btn--texto oculto" id="btnCancelarEdicao">Cancelar edição</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================= Lista ================= -->
+    <section class="coluna-lista" aria-labelledby="tituloLista">
+      <div class="barra-filtros">
+        <h2 id="tituloLista">Chamados registrados</h2>
+        <div class="filtros">
+          <label class="sr-only" for="filtroStatus">Filtrar por status</label>
+          <select id="filtroStatus">
+            <option value="">Todos os status</option>
+            <option>Aberto</option>
+            <option>Em atendimento</option>
+            <option>Concluído</option>
+            <option>Cancelado</option>
+          </select>
+
+          <label class="sr-only" for="filtroBusca">Buscar</label>
+          <input type="search" id="filtroBusca" placeholder="Buscar por solicitante ou problema">
+        </div>
+      </div>
+
+      <div id="listaChamados" class="lista" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <div id="mensagem" class="notificacao" role="status" hidden></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
